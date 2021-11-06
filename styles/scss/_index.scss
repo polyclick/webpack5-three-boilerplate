@@ -1,0 +1,49 @@
+// Apply a natural box layout model to all elements
+// but allowing components to change
+// http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #202124;
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+}
+
+#container {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+
+  padding: 5%;
+
+  // Center contents (children) vertically & horizontally
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#object {
+  aspect-ratio: 1;     // Default, square aspect ratio
+  overflow: hidden;
+
+  &.aspect-a { aspect-ratio: 1/1.41421 }          // ISO A1, A2, A3, ... Paper sizes
+  &.aspect-16-9-landscape { aspect-ratio: 16/9 }  // 16:9 commonly used widescreen
+  &.aspect-16-9-portrait { aspect-ratio: 9/16 }   // 16:9 but rotated 90deg
+  &.aspect-4-3 { aspect-ratio: 4/3 }              // Old 4:3 screen aspect ratio
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}

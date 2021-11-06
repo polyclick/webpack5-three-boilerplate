@@ -1,0 +1,49 @@
+{
+  "name": "webpack5-three-boilerplate",
+  "version": "1.0.0",
+  "description": "Plain Webpack 5 boilerplate with Babel, SASS and three.js on board.",
+  "author": "polyclick",
+  "license": "MIT",
+  "homepage": "https://github.com/polyclick/webpack5-three-boilerplate",
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "scripts": {
+    "dev": "webpack serve --progress --env dev --config webpack.dev.js",
+    "build": "webpack --progress --env prod --config webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://polyclick@bitbucket.org/polyclick/webpack5-three-boilerplate.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "7.16.0",
+    "@babel/plugin-syntax-dynamic-import": "7.8.3",
+    "@babel/preset-env": "7.16.0",
+    "assert": "^2.0.0",
+    "babel-loader": "8.2.3",
+    "clean-webpack-plugin": "4.0.0",
+    "copy-webpack-plugin": "9.0.1",
+    "css-loader": "6.5.1",
+    "dat.gui": "^0.7.7",
+    "fetch-retry": "^5.0.1",
+    "file-loader": "6.2.0",
+    "html-webpack-plugin": "5.5.0",
+    "image-minimizer-webpack-plugin": "^2.2.0",
+    "imagemin-svgo": "^10.0.0",
+    "lodash": "^4.17.21",
+    "node-sass": "6.0.1",
+    "process": "^0.11.10",
+    "raw-loader": "^4.0.2",
+    "sass-loader": "12.3.0",
+    "stats.js": "^0.17.0",
+    "style-loader": "3.3.1",
+    "three": "^0.134.0",
+    "url-loader": "4.1.1",
+    "webpack": "5.62.1",
+    "webpack-cli": "4.9.1",
+    "webpack-dev-server": "4.4.0",
+    "webpack-merge": "5.8.0"
+  }
+}
