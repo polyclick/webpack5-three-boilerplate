@@ -15,7 +15,7 @@ export default class App {
       // add gui parameters here
     }
 
-    this.setup()
+    this.init()
 
     this.createGUI()
     this.createWorld()
@@ -23,7 +23,13 @@ export default class App {
     this.update()
   }
 
-  setup() {
+
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //// INIT & CREATION
+  ///////////////////////////////////////////////////////////////////////////////
+
+  init() {
 
     // Canvas element
     this.containerEl = document.body.querySelector(`#container`)
@@ -54,7 +60,7 @@ export default class App {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
     this.controls.update()
 
-    new ResizeObserver((e) => this.handleContainerResize(e)).observe(this.containerEl)
+    new ResizeObserver(() => this.handleContainerResize()).observe(this.containerEl)
   }
 
 
@@ -96,6 +102,11 @@ export default class App {
   }
 
 
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //// UPDATE LOOP
+  ///////////////////////////////////////////////////////////////////////////////
+
   update() {
     requestAnimationFrame(() => this.update())
 
@@ -108,33 +119,43 @@ export default class App {
     this.stats.end()
   }
 
-  // See: https://stackoverflow.com/a/45046955/341358
-  resizeCanvasToDisplaySize(renderer, camera) {
+
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //// RESIZING
+  ///////////////////////////////////////////////////////////////////////////////
+
+  // The container div has resized
+  //  ↪ Keep 'object' div within the container respecting its set aspect ratio (contain)
+  //  ↪ Update the three.js renderer, camera aspect, ...
+  handleContainerResize() {
+
+    const { containerEl, aspectRatio, objectEl, renderer, camera } = this
+
+    // Set object style width/height to auto (simulates a css display 'contain')
+    const isTall = containerEl.clientWidth / containerEl.clientHeight < aspectRatio
+    objectEl.style.width = isTall ? '100%' : 'auto'
+    objectEl.style.height = isTall ? 'auto' : '100%'
+
+    // Update three.js stuff
+    //  ↪ See: https://stackoverflow.com/a/45046955/341358
     const canvas = renderer.domElement
 
-    // look up the size the canvas is being displayed
+    // Look up the size the canvas is being displayed
     const width = canvas.clientWidth
     const height = canvas.clientHeight
 
-    // adjust displayBuffer size to match
+    // Adjust displayBuffer size to match
     if (canvas.width !== width || canvas.height !== height) {
 
-      // you must pass false here or three.js sadly fights the browser
+      // Update renderer & camera
       renderer.setSize(width, height, false)
       camera.aspect = width / height
       camera.updateProjectionMatrix()
 
-      // update any render target sizes here
+      // TODO: Update any render target sizes here
+      // ...
     }
-  }
-
-  handleContainerResize(e) {
-
-    const isTall = this.containerEl.clientWidth / this.containerEl.clientHeight < this.aspectRatio
-    this.objectEl.style.width = isTall ? '100%' : 'auto'
-    this.objectEl.style.height = isTall ? 'auto' : '100%'
-
-    this.resizeCanvasToDisplaySize(this.renderer, this.camera)
   }
 
 }
