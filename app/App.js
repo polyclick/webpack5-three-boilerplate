@@ -1,18 +1,17 @@
 import Stats from 'stats.js'
 import { GUI } from 'dat.gui'
-import { AxesHelper, Clock, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene, WebGLRenderer } from 'three'
+import { Clock, Mesh, PerspectiveCamera, PlaneGeometry, Scene, ShaderMaterial, WebGLRenderer } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+
+import { AxesHelper, MeshBasicMaterial } from 'three'
+import { DefaultVertexShaderGLSL } from './shaders/DefaultVertexShader.glsl'
+import { DefaultFragmentShaderGLSL } from './shaders/DefaultFragmentShader.glsl'
 
 export default class App {
 
   constructor() {
 
     this.config = {
-      resize: {
-        type: `default`,    // default: full width & height, alternative: `poster`
-        aspect: `auto`      // ignored on default, active when `poster`
-      }
-
       // add gui parameters here
     }
 
@@ -74,16 +73,25 @@ export default class App {
   createWorld() {
 
     // Floor plane
-    const floorMesh = new Mesh(
-      new PlaneGeometry(1000, 1000, 50, 50),
-      new MeshBasicMaterial({ color: 0x333333, wireframe: true })
-    )
-    floorMesh.rotation.x = Math.PI / 2
-    this.scene.add(floorMesh)
+    // const floorMesh = new Mesh(
+    //   new PlaneGeometry(1000, 1000, 50, 50),
+    //   new MeshBasicMaterial({ color: 0x333333, wireframe: true })
+    // )
+    // floorMesh.rotation.x = Math.PI / 2
+    // this.scene.add(floorMesh)
 
     // Axes Helper
-    const axesHelper = new AxesHelper(100)
-    this.scene.add(axesHelper)
+    // const axesHelper = new AxesHelper(100)
+    // this.scene.add(axesHelper)
+
+    // Plane with custom shader
+    this.scene.add(new Mesh(
+      new PlaneGeometry(100, 100, 1, 1),
+      new ShaderMaterial({
+        vertexShader: DefaultVertexShaderGLSL,
+        fragmentShader: DefaultFragmentShaderGLSL
+      })
+    ))
 
   }
 
