@@ -128,6 +128,14 @@ module.exports = (env) => {
           test: /\.svg$/,
           use: ['raw-loader'],
         },
+
+        // SHADERS
+        {
+          test: /\.glsl$/,
+          use: [
+            { loader: 'webpack-glsl-loader' }
+          ]
+        },
       ],
     },
 
