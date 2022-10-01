@@ -4,8 +4,8 @@ import { Clock, Mesh, PerspectiveCamera, PlaneGeometry, Scene, ShaderMaterial, W
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import { AxesHelper, MeshBasicMaterial } from 'three'
-import { DefaultVertexShaderGLSL } from './shaders/DefaultVertexShader.glsl'
-import { DefaultFragmentShaderGLSL } from './shaders/DefaultFragmentShader.glsl'
+import DefaultVertexShaderGLSL from './shaders/DefaultVertexShader.glsl'
+import DefaultFragmentShaderGLSL from './shaders/DefaultFragmentShader.glsl'
 
 export default class App {
 
