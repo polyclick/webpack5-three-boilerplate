@@ -15,6 +15,8 @@ module.exports = (env) => {
   const IS_DEV = !!env.dev;
 
   return {
+    cache: false,
+
     entry: {
       main: path.join(dirApp, 'index'),
     },
@@ -106,15 +108,13 @@ module.exports = (env) => {
         // SVG
         {
           test: /\.svg$/,
-          use: ['raw-loader'],
+          use: 'raw-loader',
         },
 
         // SHADERS
         {
           test: /\.glsl$/,
-          use: [
-            { loader: 'webpack-glsl-loader' }
-          ]
+          use: 'webpack-glsl-loader'
         },
       ],
     },
